@@ -1,10 +1,11 @@
 from tkinter import *
 from wanderer.maze import Maze
+from wanderer.hero import Hero
 
 
 # Create the tk environment as usual
 root = Tk()
-canvas = Canvas(root, width=600, height=600)
+canvas = Canvas(root, width=720, height=720)
 
 """
 img = PhotoImage(file="images/floor.gif")
@@ -12,8 +13,28 @@ canvas.create_image(40, 40, image=img)
 """
 
 maze = Maze(canvas)
+hero = Hero(canvas)
 
+def on_key_press(e):
 
+    current_pos = hero.get_hero_position()
+
+    if e.keycode == 87:
+        #up
+        hero.draw_hero(current_pos[0], current_pos[1]-1)
+        print("up [" + str(current_pos[0]) + "  " + str(current_pos[1]) + " ]")
+    elif e.keycode == 83:
+        #down
+        hero.draw_hero(current_pos[0], current_pos[1]+1)
+        print("down [" + str(current_pos[0]) + "  " + str(current_pos[1]) + " ]")
+    elif e.keycode == 68:
+        #right
+        hero.draw_hero(current_pos[0]+1, current_pos[1])
+        print("right [" + str(current_pos[0]) + "  " + str(current_pos[1]) + " ]")
+    elif e.keycode == 65:
+        #left
+        hero.draw_hero(current_pos[0]-1, current_pos[1])
+        print("left [" + str(current_pos[0]) + "  " + str(current_pos[1]) + " ]")
 
 """
 
@@ -34,7 +55,7 @@ def on_key_press(e):
 """
 
 # Tell the canvas that we prepared a function that can deal with the key press events
-#canvas.bind("<KeyPress>", on_key_press)
+canvas.bind("<KeyPress>", on_key_press)
 canvas.pack()
 
 # Select the canvas to be in focused so it actually recieves the key hittings

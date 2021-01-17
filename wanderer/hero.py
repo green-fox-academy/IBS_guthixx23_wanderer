@@ -1,12 +1,19 @@
 from tkinter import *
 from wanderer.character import Character
 
+
 class Hero(Character):
 
     def __init__(self, canvas, controller):
         Character.__init__(self)
+        self.hp = 20 + 3 * self.roll_d6()
+        self.dp = 2 * self.roll_d6()
+        self.sp = 5 + self.roll_d6()
+        self.current_hp = self.hp
+
         self.controller = controller
         self.canvas = canvas
+
         self.image_down = PhotoImage(file="images/hero-down.gif")
         self.image_right = PhotoImage(file="images/hero-right.gif")
         self.image_left = PhotoImage(file="images/hero-left.gif")

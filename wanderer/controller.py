@@ -9,3 +9,4 @@ class Controller():
         self.maze = Maze(canvas, self)
         self.hero = Hero(canvas, self)
         self.enemies = Enemies(canvas, self)
+        pass

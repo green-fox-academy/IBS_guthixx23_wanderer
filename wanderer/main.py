@@ -2,11 +2,12 @@ from tkinter import *
 from wanderer.maze import Maze
 from wanderer.hero import Hero
 from wanderer.controller import Controller
-
+from tkinter.font import Font
+import random
 
 # Create the tk environment as usual
 root = Tk()
-canvas = Canvas(root, width=715, height=800)
+canvas = Canvas(root, width=715, height=720)
 
 """
 img = PhotoImage(file="images/floor.gif")
@@ -15,33 +16,43 @@ canvas.create_image(40, 40, image=img)
 
 ctr = Controller(canvas)
 
-#maze = Maze(canvas)
-#hero = Hero(canvas)
+var1 = StringVar()
+# maze = Maze(canvas)
+# hero = Hero(canvas)
 
 def on_key_press(e):
-
     current_pos = ctr.hero.get_hero_position()
 
     if e.keycode == 87:
-        #up
+        # up
         ctr.maze.draw_cell(current_pos[0], current_pos[1])
-        ctr.hero.draw_hero(current_pos[1], current_pos[0]-1)
+        ctr.hero.draw_hero(current_pos[1], current_pos[0] - 1)
         print("up [" + str(current_pos[0]) + "  " + str(current_pos[1]) + " ]")
     elif e.keycode == 83:
-        #down
+        # down
         ctr.maze.draw_cell(current_pos[0], current_pos[1])
-        ctr.hero.draw_hero(current_pos[1], current_pos[0]+1)
+        ctr.hero.draw_hero(current_pos[1], current_pos[0] + 1)
         print("down [" + str(current_pos[0]) + "  " + str(current_pos[1]) + " ]")
     elif e.keycode == 68:
-        #right
+        # right
         ctr.maze.draw_cell(current_pos[0], current_pos[1])
-        ctr.hero.draw_hero(current_pos[1]+1, current_pos[0])
+        ctr.hero.draw_hero(current_pos[1] + 1, current_pos[0])
         print("right [" + str(current_pos[0]) + "  " + str(current_pos[1]) + " ]")
     elif e.keycode == 65:
-        #left
+        # left
         ctr.maze.draw_cell(current_pos[0], current_pos[1])
-        ctr.hero.draw_hero(current_pos[1]-1, current_pos[0])
+        ctr.hero.draw_hero(current_pos[1] - 1, current_pos[0])
         print("left [" + str(current_pos[0]) + "  " + str(current_pos[1]) + " ]")
+
+    for i in ctr.enemies.enemies:
+        if i.position_x == ctr.hero.position_x and i.position_y == ctr.hero.position_y:
+            var1.set("Hero (Level " + str(ctr.maze.level) + ") HP: " + str(ctr.hero.current_hp) + "/" + str(
+                ctr.hero.hp) + " | DP: " + str(ctr.hero.dp) + " | SP: " + str(ctr.hero.sp) + "\t" + "Enemy HP: " + str(
+                i.hp) + " | DP: " + str(i.dp) + " | SP: " + str(i.sp))
+        else:
+            var1.set( " " + str(random.randint(1,10)) + "Hero (Level " + str(ctr.maze.level) + ") HP: " + str(ctr.hero.current_hp) + "/" + str(
+                ctr.hero.hp) + " | DP: " + str(ctr.hero.dp) + " | SP: " + str(ctr.hero.sp))
+
 
 """
 
@@ -63,13 +74,31 @@ def on_key_press(e):
 
 # Tell the canvas that we prepared a function that can deal with the key press events
 canvas.bind("<KeyPress>", on_key_press)
+"""
+var1 = StringVar()
+var1.set("Hero (Level " + str(ctr.maze.level) + ") HP: " + str(ctr.hero.current_hp) + "/" + str(
+    ctr.hero.hp) + " | DP: " + str(ctr.hero.dp) + " | SP: " + str(ctr.hero.sp))
+"""
+my_font = Font(family="Times New Roman", size=12, weight="bold")
+label_hero = Label(root, textvariable=var1, anchor=S, font=my_font)
+var2 = StringVar()
+
 canvas.pack()
+label_hero.pack()
+
+"""
+for i in ctr.enemies.enemies:
+    if i.position_x == ctr.hero.position_x and i.position_y == ctr.hero.position_y:
+        var2.set("Szuper!!")
+        label_enemy = Label(root, textvariable=var2, anchor=S, font=my_font)
+        label_enemy.pack()
+"""
 
 # Select the canvas to be in focused so it actually recieves the key hittings
 canvas.focus_set()
 
 # Draw the box in the initial position
-#box.draw(canvas)
+# box.draw(canvas)
 
 
 root.mainloop()

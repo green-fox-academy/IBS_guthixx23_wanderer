@@ -6,7 +6,7 @@ from wanderer.controller import Controller
 
 # Create the tk environment as usual
 root = Tk()
-canvas = Canvas(root, width=720, height=720)
+canvas = Canvas(root, width=715, height=800)
 
 """
 img = PhotoImage(file="images/floor.gif")

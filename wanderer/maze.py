@@ -32,8 +32,8 @@ class Maze():
 
         """
 
-        for i in range(1, len(self.layout)):
-            for j in range(1, len(self.layout[0])):
+        for i in range(1, 11):
+            for j in range(1, 11):
                 self.draw_cell(i,j)
 
     def init_layout(self):

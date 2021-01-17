@@ -1,9 +1,10 @@
 from tkinter import *
+from wanderer.character import Character
 
-
-class Hero():
+class Hero(Character):
 
     def __init__(self, canvas, controller):
+        Character.__init__(self)
         self.controller = controller
         self.canvas = canvas
         self.image_down = PhotoImage(file="images/hero-down.gif")

@@ -1,5 +1,6 @@
 from wanderer.maze import Maze
 from wanderer.hero import Hero
+from wanderer.enemies import Enemies
 
 class Controller():
 
@@ -7,3 +8,4 @@ class Controller():
         self.canvas = canvas
         self.maze = Maze(canvas, self)
         self.hero = Hero(canvas, self)
+        self.enemies = Enemies(canvas, self)

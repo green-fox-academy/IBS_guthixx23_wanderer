@@ -37,10 +37,13 @@ class Maze():
                 self.draw_cell(i,j)
 
     def init_layout(self):
-        for i in range(0, 13):
+        for i in range(0, 12):
             temp = []
-            for j in range(0, 13):
-                temp.append(0)
+            for j in range(0, 12):
+                if i == 0 or i == 11 or j == 0 or j == 11:
+                    temp.append(1)
+                else:
+                    temp.append(0)
             self.layout.append(temp)
 
         if self.level == 1:

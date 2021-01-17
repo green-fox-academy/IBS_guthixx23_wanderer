@@ -21,24 +21,40 @@ class Hero():
                                      image=self.image_down)
 
         if x_pos == self.position_x + 1:
-            self.canvas.create_image(self.position_x * 72 + 36, (self.position_y - 1) * 72 + 36, image=self.image_right)
-            self.position_x = x_pos
+            if self.controller.maze.layout[self.position_y][self.position_x + 1] != 1:
+                self.canvas.create_image(self.position_x * 72 + 36, (self.position_y - 1) * 72 + 36,
+                                         image=self.image_right)
+                self.position_x = x_pos
+            else:
+                self.canvas.create_image((self.position_x - 1) * 72 + 36, (self.position_y - 1) * 72 + 36,
+                                         image=self.image_right)
 
         if x_pos == self.position_x - 1:
-            self.canvas.create_image((self.position_x - 2) * 72 + 36, (self.position_y - 1) * 72 + 36,
-                                     image=self.image_left)
-            self.position_x = x_pos
+            if self.controller.maze.layout[self.position_y][self.position_x - 1] != 1:
+                self.canvas.create_image((self.position_x - 2) * 72 + 36, (self.position_y - 1) * 72 + 36,
+                                         image=self.image_left)
+                self.position_x = x_pos
+            else:
+                self.canvas.create_image((self.position_x - 1) * 72 + 36, (self.position_y - 1) * 72 + 36,
+                                         image=self.image_left)
 
         if y_pos == self.position_y + 1:
-            self.canvas.create_image((self.position_x - 1) * 72 + 36, self.position_y  * 72 + 36, image=self.image_down)
-            self.position_y = y_pos
+            if self.controller.maze.layout[self.position_y + 1][self.position_x] != 1:
+                self.canvas.create_image((self.position_x - 1) * 72 + 36, self.position_y * 72 + 36,
+                                         image=self.image_down)
+                self.position_y = y_pos
+            else:
+                self.canvas.create_image((self.position_x - 1) * 72 + 36, (self.position_y - 1) * 72 + 36,
+                                         image=self.image_down)
 
         if y_pos == self.position_y - 1:
-            self.canvas.create_image((self.position_x - 1) * 72 + 36, (self.position_y -2 ) * 72 + 36,
-                                     image=self.image_up)
-            self.position_y = y_pos
+            if self.controller.maze.layout[self.position_y - 1][self.position_x] != 1:
+                self.canvas.create_image((self.position_x - 1) * 72 + 36, (self.position_y - 2) * 72 + 36,
+                                         image=self.image_up)
+                self.position_y = y_pos
+            else:
+                self.canvas.create_image((self.position_x - 1) * 72 + 36, (self.position_y - 1) * 72 + 36,
+                                         image=self.image_up)
 
     def get_hero_position(self):
         return [self.position_y, self.position_x]
-
-

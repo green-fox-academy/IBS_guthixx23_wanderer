@@ -3,7 +3,8 @@ from tkinter import *
 
 class Maze():
 
-    def __init__(self, canvas):
+    def __init__(self, canvas, controller):
+        self.controller = controller
         self.canvas = canvas
         self.level = 1
         self.wall = PhotoImage(file="images/wall.gif")
@@ -33,12 +34,7 @@ class Maze():
 
         for i in range(1, len(self.layout)):
             for j in range(1, len(self.layout[0])):
-                if self.layout[i][j] == 1:
-                    self.canvas.create_image((j - 1) * self.wall.width() + self.wall.width() / 2,
-                                             (i - 1) * self.wall.width() + self.wall.width() / 2, image=self.wall)
-                else:
-                    self.canvas.create_image((j - 1) * self.floor.width() + self.floor.width() / 2,
-                                             (i - 1) * self.floor.width() + self.floor.width() / 2, image=self.floor)
+                self.draw_cell(i,j)
 
     def init_layout(self):
         for i in range(0, 13):
@@ -49,6 +45,9 @@ class Maze():
 
         if self.level == 1:
             self.default_map()
+
+            for p in self.layout:
+                print(p)
         else:
             self.random_map()
 
@@ -90,6 +89,14 @@ class Maze():
         self.layout[10][4] = 1
         self.layout[10][6] = 1
         self.layout[10][7] = 1
+
+    def draw_cell(self, x_pos, y_pos):
+        if self.layout[x_pos][y_pos] == 1:
+            self.canvas.create_image((y_pos - 1) * self.wall.width() + self.wall.width() / 2,
+                                     (x_pos - 1) * self.wall.width() + self.wall.width() / 2, image=self.wall)
+        else:
+            self.canvas.create_image((y_pos - 1) * self.floor.width() + self.floor.width() / 2,
+                                     (x_pos - 1) * self.floor.width() + self.floor.width() / 2, image=self.floor)
 
     def random_map(self):
         pass

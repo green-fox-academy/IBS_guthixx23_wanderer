@@ -1,6 +1,7 @@
 from tkinter import *
 from wanderer.maze import Maze
 from wanderer.hero import Hero
+from wanderer.controller import Controller
 
 
 # Create the tk environment as usual
@@ -12,28 +13,34 @@ img = PhotoImage(file="images/floor.gif")
 canvas.create_image(40, 40, image=img)
 """
 
-maze = Maze(canvas)
-hero = Hero(canvas)
+ctr = Controller(canvas)
+
+#maze = Maze(canvas)
+#hero = Hero(canvas)
 
 def on_key_press(e):
 
-    current_pos = hero.get_hero_position()
+    current_pos = ctr.hero.get_hero_position()
 
     if e.keycode == 87:
         #up
-        hero.draw_hero(current_pos[0], current_pos[1]-1)
+        ctr.maze.draw_cell(current_pos[0], current_pos[1])
+        ctr.hero.draw_hero(current_pos[1], current_pos[0]-1)
         print("up [" + str(current_pos[0]) + "  " + str(current_pos[1]) + " ]")
     elif e.keycode == 83:
         #down
-        hero.draw_hero(current_pos[0], current_pos[1]+1)
+        ctr.maze.draw_cell(current_pos[0], current_pos[1])
+        ctr.hero.draw_hero(current_pos[1], current_pos[0]+1)
         print("down [" + str(current_pos[0]) + "  " + str(current_pos[1]) + " ]")
     elif e.keycode == 68:
         #right
-        hero.draw_hero(current_pos[0]+1, current_pos[1])
+        ctr.maze.draw_cell(current_pos[0], current_pos[1])
+        ctr.hero.draw_hero(current_pos[1]+1, current_pos[0])
         print("right [" + str(current_pos[0]) + "  " + str(current_pos[1]) + " ]")
     elif e.keycode == 65:
         #left
-        hero.draw_hero(current_pos[0]-1, current_pos[1])
+        ctr.maze.draw_cell(current_pos[0], current_pos[1])
+        ctr.hero.draw_hero(current_pos[1]-1, current_pos[0])
         print("left [" + str(current_pos[0]) + "  " + str(current_pos[1]) + " ]")
 
 """

@@ -3,7 +3,8 @@ from tkinter import *
 
 class Hero():
 
-    def __init__(self, canvas):
+    def __init__(self, canvas, controller):
+        self.controller = controller
         self.canvas = canvas
         self.image_down = PhotoImage(file="images/hero-down.gif")
         self.image_right = PhotoImage(file="images/hero-right.gif")
@@ -38,4 +39,6 @@ class Hero():
             self.position_y = y_pos
 
     def get_hero_position(self):
-        return [self.position_x, self.position_y]
+        return [self.position_y, self.position_x]
+
+

@@ -25,30 +25,33 @@ def on_key_press(e):
 
     if e.keycode == 87:
         # up
-        ctr.maze.draw_cell(current_pos[0], current_pos[1])
-        ctr.hero.draw_hero(current_pos[1], current_pos[0] - 1)
+
+        ctr.maze.draw_cell(ctr.hero.position_row, ctr.hero.position_col)
+        ctr.hero.draw_hero_2(ctr.hero.position_row-1, ctr.hero.position_col)
         print("up [" + str(current_pos[0]) + "  " + str(current_pos[1]) + " ]")
+
     elif e.keycode == 83:
         # down
-        ctr.maze.draw_cell(current_pos[0], current_pos[1])
-        ctr.hero.draw_hero(current_pos[1], current_pos[0] + 1)
+        ctr.maze.draw_cell(ctr.hero.position_row, ctr.hero.position_col)
+        ctr.hero.draw_hero_2(ctr.hero.position_row+1, ctr.hero.position_col )
         print("down [" + str(current_pos[0]) + "  " + str(current_pos[1]) + " ]")
     elif e.keycode == 68:
         # right
-        ctr.maze.draw_cell(current_pos[0], current_pos[1])
-        ctr.hero.draw_hero(current_pos[1] + 1, current_pos[0])
+        ctr.maze.draw_cell(ctr.hero.position_row, ctr.hero.position_col)
+        ctr.hero.draw_hero_2(ctr.hero.position_row, ctr.hero.position_col+1 )
         print("right [" + str(current_pos[0]) + "  " + str(current_pos[1]) + " ]")
     elif e.keycode == 65:
         # left
-        ctr.maze.draw_cell(current_pos[0], current_pos[1])
-        ctr.hero.draw_hero(current_pos[1] - 1, current_pos[0])
+        ctr.maze.draw_cell(ctr.hero.position_row, ctr.hero.position_col)
+        ctr.hero.draw_hero_2(ctr.hero.position_row, ctr.hero.position_col-1)
         print("left [" + str(current_pos[0]) + "  " + str(current_pos[1]) + " ]")
 
     for i in ctr.enemies.enemies:
-        if i.position_x == ctr.hero.position_x and i.position_y == ctr.hero.position_y:
+        if i.position_row == ctr.hero.position_row and i.position_col == ctr.hero.position_col:
             var1.set("Hero (Level " + str(ctr.maze.level) + ") HP: " + str(ctr.hero.current_hp) + "/" + str(
                 ctr.hero.hp) + " | DP: " + str(ctr.hero.dp) + " | SP: " + str(ctr.hero.sp) + "\t" + "Enemy HP: " + str(
                 i.hp) + " | DP: " + str(i.dp) + " | SP: " + str(i.sp))
+            break
         else:
             var1.set( " " + str(random.randint(1,10)) + "Hero (Level " + str(ctr.maze.level) + ") HP: " + str(ctr.hero.current_hp) + "/" + str(
                 ctr.hero.hp) + " | DP: " + str(ctr.hero.dp) + " | SP: " + str(ctr.hero.sp))
@@ -88,7 +91,7 @@ label_hero.pack()
 
 """
 for i in ctr.enemies.enemies:
-    if i.position_x == ctr.hero.position_x and i.position_y == ctr.hero.position_y:
+    if i.position_row == ctr.hero.position_row and i.position_col == ctr.hero.position_col:
         var2.set("Szuper!!")
         label_enemy = Label(root, textvariable=var2, anchor=S, font=my_font)
         label_enemy.pack()

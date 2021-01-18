@@ -93,13 +93,13 @@ class Maze():
         self.layout[10][6] = 1
         self.layout[10][7] = 1
 
-    def draw_cell(self, x_pos, y_pos):
-        if self.layout[x_pos][y_pos] == 1:
-            self.canvas.create_image((y_pos - 1) * self.wall.width() + self.wall.width() / 2,
-                                     (x_pos - 1) * self.wall.width() + self.wall.width() / 2, image=self.wall)
+    def draw_cell(self, col, row):
+        if self.layout[col][row] == 1:
+            self.canvas.create_image((row - 1) * self.wall.width() + self.wall.width() / 2,
+                                     (col - 1) * self.wall.width() + self.wall.width() / 2, image=self.wall)
         else:
-            self.canvas.create_image((y_pos - 1) * self.floor.width() + self.floor.width() / 2,
-                                     (x_pos - 1) * self.floor.width() + self.floor.width() / 2, image=self.floor)
+            self.canvas.create_image((row - 1) * self.floor.width() + self.floor.width() / 2,
+                                     (col - 1) * self.floor.width() + self.floor.width() / 2, image=self.floor)
 
     def random_map(self):
         pass

@@ -7,8 +7,8 @@ class Character():
         self.hp = 0
         self.dp = 0
         self.sp = 0
-        self.position_x = 0
-        self.position_y = 0
+        self.position_row = 0
+        self.position_col = 0
 
     def roll_d6(self):
         return random.randint(1, 6)
@@ -37,5 +37,5 @@ class Character():
         i,j = self.find_empty_cell(maze)
         canvas.create_image((i-1) * 72 + 36, (j-1)  * 72 + 36,
                                  image=self.image)
-        self.position_x = i
-        self.position_y = j
+        self.position_col = i
+        self.position_row = j
